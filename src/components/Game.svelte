@@ -1,4 +1,5 @@
 <script>
+    import Snake from "./Snake.svelte";
 
     // Props of the game
    export let width = 600;
@@ -153,7 +154,7 @@
     <!-- If block to test if the game is not lost -->
 
         <!-- Snake component -->
-     
+        <Snake />
         <!-- /Snake -->
         <!-- Food component -->
       
