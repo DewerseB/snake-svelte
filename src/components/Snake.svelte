@@ -55,7 +55,7 @@
 {#each body as part, i}
     <!-- If index = 0, display the head of the snake -->
     {#if i === 0}
-    <div class="snake {colorSnake}" style="width: {size-1}px; height: {size-1}px; left: {part.x}px; top: {part.y}px; z-index: 20">
+    <div class="snake {colorSnake} {direction}" style="width: {size-1}px; height: {size-1}px; left: {part.x}px; top: {part.y}px; z-index: 20">
         <div class="eye" style="top: {size/5}px; left: {size*5/8}px">
 
         </div>
