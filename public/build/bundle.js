@@ -468,19 +468,19 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div = element("div");
-    			attr_dev(div, "class", div_class_value = "snake " + /*colorSnake*/ ctx[2] + " svelte-1ctkk5r");
-    			attr_dev(div, "style", div_style_value = "width: " + (/*size*/ ctx[1] - 1) + "px; height: " + (/*size*/ ctx[1] - 1) + "px; left :" + /*part*/ ctx[4].x + "px; top:" + /*part*/ ctx[4].y + "px; z-index: 10;");
-    			add_location(div, file, 67, 4, 1472);
+    			attr_dev(div, "class", div_class_value = "snake " + /*colorSnake*/ ctx[3] + " svelte-1ctkk5r");
+    			attr_dev(div, "style", div_style_value = "width: " + (/*size*/ ctx[2] - 1) + "px; height: " + (/*size*/ ctx[2] - 1) + "px; left :" + /*part*/ ctx[4].x + "px; top:" + /*part*/ ctx[4].y + "px; z-index: 10;");
+    			add_location(div, file, 67, 4, 1484);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*colorSnake*/ 4 && div_class_value !== (div_class_value = "snake " + /*colorSnake*/ ctx[2] + " svelte-1ctkk5r")) {
+    			if (dirty & /*colorSnake*/ 8 && div_class_value !== (div_class_value = "snake " + /*colorSnake*/ ctx[3] + " svelte-1ctkk5r")) {
     				attr_dev(div, "class", div_class_value);
     			}
 
-    			if (dirty & /*size, body*/ 3 && div_style_value !== (div_style_value = "width: " + (/*size*/ ctx[1] - 1) + "px; height: " + (/*size*/ ctx[1] - 1) + "px; left :" + /*part*/ ctx[4].x + "px; top:" + /*part*/ ctx[4].y + "px; z-index: 10;")) {
+    			if (dirty & /*size, body*/ 5 && div_style_value !== (div_style_value = "width: " + (/*size*/ ctx[2] - 1) + "px; height: " + (/*size*/ ctx[2] - 1) + "px; left :" + /*part*/ ctx[4].x + "px; top:" + /*part*/ ctx[4].y + "px; z-index: 10;")) {
     				attr_dev(div, "style", div_style_value);
     			}
     		},
@@ -515,16 +515,16 @@ var app = (function () {
     			t = space();
     			div1 = element("div");
     			attr_dev(div0, "class", "eye svelte-1ctkk5r");
-    			set_style(div0, "top", /*size*/ ctx[1] / 5 + "px");
-    			set_style(div0, "left", /*size*/ ctx[1] * 5 / 8 + "px");
-    			add_location(div0, file, 58, 8, 1235);
+    			set_style(div0, "top", /*size*/ ctx[2] / 5 + "px");
+    			set_style(div0, "left", /*size*/ ctx[2] * 5 / 8 + "px");
+    			add_location(div0, file, 58, 8, 1247);
     			attr_dev(div1, "class", "eye svelte-1ctkk5r");
-    			set_style(div1, "top", /*size*/ ctx[1] * 2 / 5 + "px");
-    			set_style(div1, "left", /*size*/ ctx[1] * 5 / 8 + "px");
-    			add_location(div1, file, 61, 8, 1324);
-    			attr_dev(div2, "class", div2_class_value = "snake " + /*colorSnake*/ ctx[2] + " svelte-1ctkk5r");
-    			set_style(div2, "width", /*size*/ ctx[1] - 1 + "px");
-    			set_style(div2, "height", /*size*/ ctx[1] - 1 + "px");
+    			set_style(div1, "top", /*size*/ ctx[2] * 2 / 5 + "px");
+    			set_style(div1, "left", /*size*/ ctx[2] * 5 / 8 + "px");
+    			add_location(div1, file, 61, 8, 1336);
+    			attr_dev(div2, "class", div2_class_value = "snake " + /*colorSnake*/ ctx[3] + " " + /*direction*/ ctx[1] + " svelte-1ctkk5r");
+    			set_style(div2, "width", /*size*/ ctx[2] - 1 + "px");
+    			set_style(div2, "height", /*size*/ ctx[2] - 1 + "px");
     			set_style(div2, "left", /*part*/ ctx[4].x + "px");
     			set_style(div2, "top", /*part*/ ctx[4].y + "px");
     			set_style(div2, "z-index", "20");
@@ -537,32 +537,32 @@ var app = (function () {
     			append_dev(div2, div1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*size*/ 2) {
-    				set_style(div0, "top", /*size*/ ctx[1] / 5 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div0, "top", /*size*/ ctx[2] / 5 + "px");
     			}
 
-    			if (dirty & /*size*/ 2) {
-    				set_style(div0, "left", /*size*/ ctx[1] * 5 / 8 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div0, "left", /*size*/ ctx[2] * 5 / 8 + "px");
     			}
 
-    			if (dirty & /*size*/ 2) {
-    				set_style(div1, "top", /*size*/ ctx[1] * 2 / 5 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div1, "top", /*size*/ ctx[2] * 2 / 5 + "px");
     			}
 
-    			if (dirty & /*size*/ 2) {
-    				set_style(div1, "left", /*size*/ ctx[1] * 5 / 8 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div1, "left", /*size*/ ctx[2] * 5 / 8 + "px");
     			}
 
-    			if (dirty & /*colorSnake*/ 4 && div2_class_value !== (div2_class_value = "snake " + /*colorSnake*/ ctx[2] + " svelte-1ctkk5r")) {
+    			if (dirty & /*colorSnake, direction*/ 10 && div2_class_value !== (div2_class_value = "snake " + /*colorSnake*/ ctx[3] + " " + /*direction*/ ctx[1] + " svelte-1ctkk5r")) {
     				attr_dev(div2, "class", div2_class_value);
     			}
 
-    			if (dirty & /*size*/ 2) {
-    				set_style(div2, "width", /*size*/ ctx[1] - 1 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div2, "width", /*size*/ ctx[2] - 1 + "px");
     			}
 
-    			if (dirty & /*size*/ 2) {
-    				set_style(div2, "height", /*size*/ ctx[1] - 1 + "px");
+    			if (dirty & /*size*/ 4) {
+    				set_style(div2, "height", /*size*/ ctx[2] - 1 + "px");
     			}
 
     			if (dirty & /*body*/ 1) {
@@ -659,7 +659,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*colorSnake, size, body*/ 7) {
+    			if (dirty & /*colorSnake, direction, size, body*/ 15) {
     				each_value = /*body*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -717,25 +717,25 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ("body" in $$props) $$invalidate(0, body = $$props.body);
-    		if ("direction" in $$props) $$invalidate(3, direction = $$props.direction);
-    		if ("size" in $$props) $$invalidate(1, size = $$props.size);
-    		if ("colorSnake" in $$props) $$invalidate(2, colorSnake = $$props.colorSnake);
+    		if ("direction" in $$props) $$invalidate(1, direction = $$props.direction);
+    		if ("size" in $$props) $$invalidate(2, size = $$props.size);
+    		if ("colorSnake" in $$props) $$invalidate(3, colorSnake = $$props.colorSnake);
     	};
 
     	$$self.$capture_state = () => ({ body, direction, size, colorSnake });
 
     	$$self.$inject_state = $$props => {
     		if ("body" in $$props) $$invalidate(0, body = $$props.body);
-    		if ("direction" in $$props) $$invalidate(3, direction = $$props.direction);
-    		if ("size" in $$props) $$invalidate(1, size = $$props.size);
-    		if ("colorSnake" in $$props) $$invalidate(2, colorSnake = $$props.colorSnake);
+    		if ("direction" in $$props) $$invalidate(1, direction = $$props.direction);
+    		if ("size" in $$props) $$invalidate(2, size = $$props.size);
+    		if ("colorSnake" in $$props) $$invalidate(3, colorSnake = $$props.colorSnake);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [body, size, colorSnake, direction];
+    	return [body, direction, size, colorSnake];
     }
 
     class Snake extends SvelteComponentDev {
@@ -744,9 +744,9 @@ var app = (function () {
 
     		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
     			body: 0,
-    			direction: 3,
-    			size: 1,
-    			colorSnake: 2
+    			direction: 1,
+    			size: 2,
+    			colorSnake: 3
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -800,7 +800,14 @@ var app = (function () {
     	let section1;
     	let p;
     	let current;
-    	snake_1 = new Snake({ $$inline: true });
+    	const snake_1_spread_levels = [/*snake*/ ctx[3]];
+    	let snake_1_props = {};
+
+    	for (let i = 0; i < snake_1_spread_levels.length; i += 1) {
+    		snake_1_props = assign(snake_1_props, snake_1_spread_levels[i]);
+    	}
+
+    	snake_1 = new Snake({ props: snake_1_props, $$inline: true });
 
     	const block = {
     		c: function create() {
@@ -813,10 +820,10 @@ var app = (function () {
     			attr_dev(section0, "class", "gameArea svelte-egcamn");
     			set_style(section0, "width", /*width*/ ctx[0] + "px");
     			set_style(section0, "height", /*height*/ ctx[1] + "px");
-    			add_location(section0, file$1, 152, 0, 3201);
-    			add_location(p, file$1, 179, 3, 3706);
+    			add_location(section0, file$1, 165, 0, 3535);
+    			add_location(p, file$1, 192, 3, 4050);
     			attr_dev(section1, "class", "svelte-egcamn");
-    			add_location(section1, file$1, 177, 0, 3664);
+    			add_location(section1, file$1, 190, 0, 4008);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -830,6 +837,12 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
+    			const snake_1_changes = (dirty & /*snake*/ 8)
+    			? get_spread_update(snake_1_spread_levels, [get_spread_object(/*snake*/ ctx[3])])
+    			: {};
+
+    			snake_1.$set(snake_1_changes);
+
     			if (!current || dirty & /*width*/ 1) {
     				set_style(section0, "width", /*width*/ ctx[0] + "px");
     			}
@@ -937,6 +950,7 @@ var app = (function () {
     	validate_slots("Game", slots, []);
     	let { width = 600 } = $$props;
     	let { height = 400 } = $$props;
+    	let { squareSize = 40 } = $$props;
 
     	// Variables of the game
     	let score = 0;
@@ -947,7 +961,12 @@ var app = (function () {
      * .direction is a string the snake is currently facing (right, left, up, down)
      * .size is the size of the square representing a bodypart
     */
-    	let snake = {};
+    	let snake = {
+    		body: [{ x: 80, y: 0 }, { x: 40, y: 0 }, { x: 0, y: 0 }],
+    		direction: "right",
+    		size: squareSize,
+    		colorSnake: "green"
+    	};
 
     	/**
      * The food object
@@ -956,7 +975,7 @@ var app = (function () {
     */
     	let food = {};
 
-    	const writable_props = ["width", "height"];
+    	const writable_props = ["width", "height", "squareSize"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Game> was created with unknown prop '${key}'`);
@@ -965,12 +984,15 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ("width" in $$props) $$invalidate(0, width = $$props.width);
     		if ("height" in $$props) $$invalidate(1, height = $$props.height);
+    		if ("squareSize" in $$props) $$invalidate(4, squareSize = $$props.squareSize);
     	};
 
     	$$self.$capture_state = () => ({
+    		App,
     		Snake,
     		width,
     		height,
+    		squareSize,
     		score,
     		snake,
     		food,
@@ -987,8 +1009,9 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ("width" in $$props) $$invalidate(0, width = $$props.width);
     		if ("height" in $$props) $$invalidate(1, height = $$props.height);
+    		if ("squareSize" in $$props) $$invalidate(4, squareSize = $$props.squareSize);
     		if ("score" in $$props) $$invalidate(2, score = $$props.score);
-    		if ("snake" in $$props) snake = $$props.snake;
+    		if ("snake" in $$props) $$invalidate(3, snake = $$props.snake);
     		if ("food" in $$props) food = $$props.food;
     	};
 
@@ -996,13 +1019,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [width, height, score];
+    	return [width, height, score, snake, squareSize];
     }
 
     class Game extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { width: 0, height: 1 });
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { width: 0, height: 1, squareSize: 4 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1025,6 +1048,14 @@ var app = (function () {
     	}
 
     	set height(value) {
+    		throw new Error("<Game>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get squareSize() {
+    		throw new Error("<Game>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set squareSize(value) {
     		throw new Error("<Game>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }

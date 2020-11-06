@@ -1,10 +1,11 @@
 <script>
-    import Snake from "./Snake.svelte";
+    import App from "../App.svelte";
+import Snake from "./Snake.svelte";
 
     // Props of the game
-   export let width = 600;
-   export let height = 400;
-
+    export let width = 600;
+    export let height = 400;
+    export let squareSize = 40;
 
     // Variables of the game
     let score = 0;    
@@ -18,7 +19,19 @@
      * .size is the size of the square representing a bodypart
     */
     let snake = {
-
+        body : [{
+            x : 80,
+            y : 0,
+        },{
+            x : 40,
+            y : 0,
+        },{
+            x : 0,
+            y : 0,
+        }],
+        direction : "right",
+        size : squareSize,
+        colorSnake : "green",
     };
 
     /**
@@ -154,7 +167,7 @@
     <!-- If block to test if the game is not lost -->
 
         <!-- Snake component -->
-        <Snake />
+        <Snake {...snake}/>
         <!-- /Snake -->
         <!-- Food component -->
       
