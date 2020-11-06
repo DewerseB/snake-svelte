@@ -1,6 +1,8 @@
 <script>
     // Food props
-
+export let x=80;
+export let y=80;
+export let size=40;
 
 
 
@@ -19,10 +21,12 @@
 </style>
 
 <!-- Div containing the food -->
+<div class="food" style="width: {size}px; height: {size}px; left: {x}px; top: {y}px;"  >
 
     <!-- Food image -->
-    
+    <img class="imgFood" src={imgSrc} alt="mouse">
     <!-- /Food -->
-
-<!-- /Div -->
+    
+    <!-- /Div -->
+</div>
 
