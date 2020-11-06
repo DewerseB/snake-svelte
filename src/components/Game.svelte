@@ -4,8 +4,8 @@
     import {randomPos} from "./Random.svelte";
 
     // Props of the game
-   export let width = 600;
-   export let height = 400;
+    export let width = 600;
+    export let height = 400;
     export let squareSize = 40;  
 
 
@@ -21,7 +21,19 @@
      * .size is the size of the square representing a bodypart
     */
     let snake = {
-
+        body : [{
+            x : 80,
+            y : 0,
+        },{
+            x : 40,
+            y : 0,
+        },{
+            x : 0,
+            y : 0,
+        }],
+        direction : "right",
+        size : squareSize,
+        colorSnake : "green",
     };
 
     /**
@@ -104,12 +116,6 @@
 
 
     }
-
-    /**
-     * Generates a random multiple of squareSize between 0 and the parameter
-     * @param {Number} max The maximum range value
-     * @return {Number} the random number
-     */
     
     
     // Event listener -------------------------------------------------------
@@ -156,7 +162,7 @@
     <!-- If block to test if the game is not lost -->
 
         <!-- Snake component -->
-        <Snake />
+        <Snake {...snake}/>
         <!-- /Snake -->
         <!-- Food component -->
         <Food {...food}/>

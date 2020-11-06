@@ -1,5 +1,5 @@
 
-(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 var app = (function () {
     'use strict';
 
@@ -888,8 +888,15 @@ var app = (function () {
     	let section1;
     	let p;
     	let current;
-    	snake_1 = new Snake({ $$inline: true });
-    	const food_1_spread_levels = [/*food*/ ctx[3]];
+    	const snake_1_spread_levels = [/*snake*/ ctx[3]];
+    	let snake_1_props = {};
+
+    	for (let i = 0; i < snake_1_spread_levels.length; i += 1) {
+    		snake_1_props = assign(snake_1_props, snake_1_spread_levels[i]);
+    	}
+
+    	snake_1 = new Snake({ props: snake_1_props, $$inline: true });
+    	const food_1_spread_levels = [/*food*/ ctx[4]];
     	let food_1_props = {};
 
     	for (let i = 0; i < food_1_spread_levels.length; i += 1) {
@@ -911,10 +918,10 @@ var app = (function () {
     			attr_dev(section0, "class", "gameArea svelte-egcamn");
     			set_style(section0, "width", /*width*/ ctx[0] + "px");
     			set_style(section0, "height", /*height*/ ctx[1] + "px");
-    			add_location(section0, file$2, 154, 0, 3397);
-    			add_location(p, file$2, 181, 3, 3921);
+    			add_location(section0, file$2, 160, 0, 3473);
+    			add_location(p, file$2, 187, 3, 4007);
     			attr_dev(section1, "class", "svelte-egcamn");
-    			add_location(section1, file$2, 179, 0, 3879);
+    			add_location(section1, file$2, 185, 0, 3965);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -930,8 +937,14 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			const food_1_changes = (dirty & /*food*/ 8)
-    			? get_spread_update(food_1_spread_levels, [get_spread_object(/*food*/ ctx[3])])
+    			const snake_1_changes = (dirty & /*snake*/ 8)
+    			? get_spread_update(snake_1_spread_levels, [get_spread_object(/*snake*/ ctx[3])])
+    			: {};
+
+    			snake_1.$set(snake_1_changes);
+
+    			const food_1_changes = (dirty & /*food*/ 16)
+    			? get_spread_update(food_1_spread_levels, [get_spread_object(/*food*/ ctx[4])])
     			: {};
 
     			food_1.$set(food_1_changes);
@@ -1027,11 +1040,6 @@ var app = (function () {
     	
     }
 
-    /**
-     * Generates a random multiple of squareSize between 0 and the parameter
-     * @param {Number} max The maximum range value
-     * @return {Number} the random number
-     */
     // Event listener -------------------------------------------------------
     function handleKeydown(event) {
     	
@@ -1053,7 +1061,12 @@ var app = (function () {
      * .direction is a string the snake is currently facing (right, left, up, down)
      * .size is the size of the square representing a bodypart
     */
-    	let snake = {};
+    	let snake = {
+    		body: [{ x: 80, y: 0 }, { x: 40, y: 0 }, { x: 0, y: 0 }],
+    		direction: "right",
+    		size: squareSize,
+    		colorSnake: "green"
+    	};
 
     	/**
      * The food object
@@ -1075,7 +1088,7 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ("width" in $$props) $$invalidate(0, width = $$props.width);
     		if ("height" in $$props) $$invalidate(1, height = $$props.height);
-    		if ("squareSize" in $$props) $$invalidate(4, squareSize = $$props.squareSize);
+    		if ("squareSize" in $$props) $$invalidate(5, squareSize = $$props.squareSize);
     	};
 
     	$$self.$capture_state = () => ({
@@ -1100,23 +1113,23 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ("width" in $$props) $$invalidate(0, width = $$props.width);
     		if ("height" in $$props) $$invalidate(1, height = $$props.height);
-    		if ("squareSize" in $$props) $$invalidate(4, squareSize = $$props.squareSize);
+    		if ("squareSize" in $$props) $$invalidate(5, squareSize = $$props.squareSize);
     		if ("score" in $$props) $$invalidate(2, score = $$props.score);
-    		if ("snake" in $$props) snake = $$props.snake;
-    		if ("food" in $$props) $$invalidate(3, food = $$props.food);
+    		if ("snake" in $$props) $$invalidate(3, snake = $$props.snake);
+    		if ("food" in $$props) $$invalidate(4, food = $$props.food);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [width, height, score, food, squareSize];
+    	return [width, height, score, snake, food, squareSize];
     }
 
     class Game extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { width: 0, height: 1, squareSize: 4 });
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { width: 0, height: 1, squareSize: 5 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
