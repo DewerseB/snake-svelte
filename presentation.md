@@ -49,6 +49,8 @@ crée la zone de jeux + titre etc ->, explication de l'import du component, appe
 <!-- Bastien -->
 Ensuite explication création snake: tableau d'objets body, direction, size, colorSnake. expliquer que le serpent est un tableau d'objet avec une direction, chaque objet est un rectangle du snake avec pos x et y.
 Expliction boucle foreach.
+Faire les divs pour la tête et le corps, utiliser colorSnake et direction.
+Montrer 2 directions.
 Expliquer la condition dans le html du snake, explication de la position absolute.
 Import component Snake dans Game.
 Déclarer l'objet snake dans la component game avec des positions fixe pour montrer que cela s'affiche. 
