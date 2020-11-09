@@ -1,11 +1,13 @@
 <script>
 
     // Props of the game
-   
+    export let width;
+    export let height;
+    export let squareSize = 40;
     
 
     // Variables of the game
-    
+    let score = 0;
 
 
 
@@ -175,7 +177,7 @@
 <!-- Section bonus -->
 <section>
     <!-- Score display -->
-   
+    <p>Score : {score}</p>
     <!-- /Score -->
     <!-- Snake's color picker -->
  

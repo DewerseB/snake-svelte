@@ -1,5 +1,6 @@
 <script>
-
+	import Food from "./components/Food.svelte";
+	import Game from "./components/Game.svelte";
 
 	/**
 	 * Game object
@@ -8,7 +9,8 @@
 	 * .squareSize : length of an in-game square
 	 */
 	let game = {
-		
+		width: 600,
+		height: 400,
 
 
 	};
@@ -26,7 +28,7 @@
 	<!-- Key: remounts everything in #key block whenever game variable changes -->
 
 		<!-- Game component with game object as a prop -->
-		
+		<Game {...game}/>
 		<!-- /Game -->
 	
 	<!-- /Key -->
