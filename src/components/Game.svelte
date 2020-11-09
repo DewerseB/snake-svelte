@@ -60,8 +60,10 @@
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
+        (loop !== null) && clearInterval(loop);
         loop = setInterval(()=>{
             move();
+            eatingTest();
             losingTest();
         }, timer)
 
@@ -108,9 +110,20 @@
      * - makes the snake grows
      */
     function eatingTest() {
-        
-
-
+        if (collide(snake.body[0], food)) {
+            score += 1;
+            food = getFood();
+            if (timer > 200) {
+                timer -= 20;
+                gameLoop();
+            }
+            snake.body = [...snake.body, {
+                x : snake.body[snake.body.length - 1].x,
+                y : snake.body[snake.body.length - 1].y,
+                oldX : snake.body[snake.body.length - 1].oldX,
+                oldY : snake.body[snake.body.length - 1].oldY,
+            }]
+        }
     }
 
     /**
@@ -159,9 +172,22 @@
      * @return the food or the function itself
      */
     function getFood() {
-       
-
-
+        let tempFood = {
+            x : randomPos(width, squareSize),
+            y : randomPos(height, squareSize),
+            size : squareSize,
+        }
+        let doesNotCollide = true;
+        for (let i = 0; i < snake.body.length && doesNotCollide === true; i++) {
+            if (collide(tempFood, snake.body[i])) {
+                doesNotCollide = false;
+            }
+        }
+        if (doesNotCollide) {
+            return tempFood;
+        } else {
+            return getFood();
+        }
     }
     
     
@@ -233,20 +259,16 @@
         <!-- /Food -->
     <!-- Else game is lost) -->
     {:else}
-    <h2 in:fade>Game Lost !!!</h2>
-    <p in:fly="{{ x: 100, duration : 1000}}">Your score is {score}</p>
+        <h2 in:fade>Game Lost !!!</h2>
+        <p in:fly="{{ x: 100, duration : 1000}}">Your score is {score}</p>
+        {#if score < 10}
+            <p in:fly="{{ y: 100, duration : 2000}}">You can do better</p>
+        {:else if score >= 10 && score < 20}
+            <p in:fly="{{ y: 100, duration : 2000}}">That's okay</p>
+        {:else}
+            <p in:fly="{{ y: 100, duration : 2000}}">Well done!</p>
+        {/if}
     {/if}
-
-       
-        
-     
-           
-    
-           
-       
-    
-    
-
     <!-- /If -->
 </section>
 <!-- /Section -->
