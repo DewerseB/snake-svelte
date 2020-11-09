@@ -1,5 +1,4 @@
 <script>
-import App from "../App.svelte";
 import Food from "./Food.svelte";
 import Snake from "./Snake.svelte";
 import {randomPos} from "./Random.svelte"; 
@@ -12,6 +11,9 @@ import {randomPos} from "./Random.svelte";
 
     // Variables of the game
     let score = 0;
+    let loop;
+    let timer = 500;
+    let choosedDirection = false;
 
 
 
@@ -25,12 +27,18 @@ import {randomPos} from "./Random.svelte";
         body : [{
             x : 0,
             y : 0,
+            oldX : 0,
+            oldY : 0
         },{
             x : 0,
             y : 0,
+            oldX : 0,
+            oldY : 0
         },{
             x : 0,
             y : 0,
+            oldX : 0,
+            oldY : 0
         }],
         direction : "right",
         size : 40,
@@ -51,9 +59,9 @@ import {randomPos} from "./Random.svelte";
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
-        
-
-        
+        loop = setInterval(()=> {
+            move();
+        }, timer)
     }
 
     // Main functions for the gameloop -------------------------------------------------------
@@ -62,9 +70,31 @@ import {randomPos} from "./Random.svelte";
      * Moves each snake bodyparts based on the snake direction
      */
     function move() {
-        
+        for (let i =0; i< snake.body.length; i++){
+            snake.body[i].oldX = snake.body[i].x;
+            snake.body[i].oldY = snake.body[i].y;
+            
+            if (i === 0){
+                if (snake.direction === "right"){
+                    snake.body[i].x += squareSize;
+                }
+                if (snake.direction === "left"){
+                    snake.body[i].x -= squareSize;
+                }
+                if (snake.direction === "down"){
+                    snake.body[i].y += squareSize;
+                }
+                if (snake.direction === "up"){
+                    snake.body[i].y -= squareSize;
+                }
+            }else {
+                snake.body[i].x = snake.body[i-1].oldX;
+                snake.body[i].y = snake.body[i-1].oldY;
 
-        
+            }
+
+        }; 
+        choosedDirection= false;
     }
 
     /**
@@ -127,15 +157,35 @@ import {randomPos} from "./Random.svelte";
     // Event listener -------------------------------------------------------
 
     function handleKeydown(event) {
-        
+        let keyCode = event.keyCode;
+        if (!choosedDirection) {
+        if (keyCode === 39 && snake.direction !=="left"){
+            snake.direction = "right";
+            choosedDirection = true;
+        }
+        if (keyCode === 37 && snake.direction !=="right"){
+            snake.direction = "left";
+            choosedDirection = true;
 
+        }
+        if (keyCode === 40 && snake.direction !=="up"){
+            snake.direction = "down";
+            choosedDirection = true;
+
+        }
+        if (keyCode === 38 && snake.direction !=="down"){
+            snake.direction = "up";
+            choosedDirection = true;
+
+        }
+    }
 
     }
 
     // Automaticaly calls the game loop when the component is loaded ----------
 
     (() => {
-        
+        gameLoop();
     })();
 
 </script>
@@ -214,5 +264,5 @@ import {randomPos} from "./Random.svelte";
 <!-- /Section-->
 
 <!-- Keydown event listener -->
-
+<svelte:window on:keydown={handleKeydown}/>
 <!-- /Keydown -->
