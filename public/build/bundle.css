@@ -1,6 +1,6 @@
 main.svelte-lbhzz2{display:flex;flex-direction:column;align-items:center}
 .food.svelte-1nona8c{position:absolute}.imgFood.svelte-1nona8c{height:100%;width:100%}
-section.svelte-ztvzuz{display:flex;flex-direction:column;align-items:center;justify-content:center}.gameArea.svelte-ztvzuz{position:relative;border:1px solid black}
+section.svelte-egcamn.svelte-egcamn{display:flex;flex-direction:column;align-items:center;justify-content:center}.gameArea.svelte-egcamn.svelte-egcamn{position:relative;border:1px solid black}input.svelte-egcamn.svelte-egcamn:focus{outline:none}.colorField.svelte-egcamn.svelte-egcamn{display:flex}.colorField.svelte-egcamn label.svelte-egcamn{margin:0 1rem 1rem 1rem}
 .snake.svelte-1ctkk5r{position:absolute;border:black solid 1px}.green.svelte-1ctkk5r{background-color:green}.yellow.svelte-1ctkk5r{background-color:yellow}.blue.svelte-1ctkk5r{background-color:blue}.eye.svelte-1ctkk5r{background-color:red;height:25%;width:25%;border-radius:50%;position:relative}.right.svelte-1ctkk5r{transform:rotate(0deg)}.left.svelte-1ctkk5r{transform:rotate(180deg)}.up.svelte-1ctkk5r{transform:rotate(270deg)}.down.svelte-1ctkk5r{transform:rotate(90deg)
     }
 

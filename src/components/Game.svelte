@@ -195,8 +195,11 @@
 
     function handleKeydown(event) {
         let keyCode = event.keyCode;
-            if (!choosedDirection && !isLost) {
-                if (keyCode === 39 && snake.direction !== "left"){
+        if (event.target.type === 'radio'){
+            event.preventDefault();
+        }
+        if (!choosedDirection && !isLost) {
+             if (keyCode === 39 && snake.direction !== "left"){
                 snake.direction = "right";
                 choosedDirection = true;
             }
@@ -235,7 +238,7 @@
         position: relative;
         border: 1px solid black;
     }
-    /* input:focus {
+    input:focus {
         outline: none;
     }
     .colorField {
@@ -244,7 +247,7 @@
     }
     .colorField label {
         margin: 0 1rem 1rem 1rem;
-    } */
+    }
 </style>
 
 <!-- Section game area -->
@@ -278,6 +281,20 @@
    <p>Score : {score}</p>
     <!-- /Score -->
     <!-- Snake's color picker -->
+    <div class="colorField">
+        <label>
+            <input type=radio bind:group={snake.colorSnake} value="green" />
+            Green
+        </label>
+        <label>
+            <input type=radio bind:group={snake.colorSnake} value="yellow" />
+            Yellow
+        </label>
+        <label>
+            <input type=radio bind:group={snake.colorSnake} value="blue" />
+            Blue
+        </label>
+    </div>
  
     
  
