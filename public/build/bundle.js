@@ -1127,8 +1127,8 @@ var app = (function () {
     			t1 = space();
     			p = element("p");
     			p.textContent = `Your score is ${/*score*/ ctx[4]}`;
-    			add_location(h2, file$2, 235, 4, 6501);
-    			add_location(p, file$2, 236, 4, 6537);
+    			add_location(h2, file$2, 235, 4, 6499);
+    			add_location(p, file$2, 236, 4, 6535);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1279,10 +1279,10 @@ var app = (function () {
     			attr_dev(section0, "class", "gameArea svelte-ztvzuz");
     			set_style(section0, "width", /*width*/ ctx[0] + "px");
     			set_style(section0, "height", /*height*/ ctx[1] + "px");
-    			add_location(section0, file$2, 224, 0, 6131);
-    			add_location(p, file$2, 255, 3, 6814);
+    			add_location(section0, file$2, 224, 0, 6129);
+    			add_location(p, file$2, 255, 3, 6812);
     			attr_dev(section1, "class", "svelte-ztvzuz");
-    			add_location(section1, file$2, 253, 0, 6772);
+    			add_location(section1, file$2, 253, 0, 6770);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");

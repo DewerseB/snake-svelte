@@ -7,7 +7,7 @@
     // Props of the game
     export let width = 600;
     export let height = 400;
-    export let squareSize = 40;  
+    export let squareSize = 40;
 
     // Variables of the game
     let score = 0;    
