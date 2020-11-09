@@ -43,7 +43,7 @@ import { fade, fly} from "svelte/transition";
             oldY : 0
         }],
         direction : "right",
-        size : 40,
+        size : squareSize,
         colorSnake : "green",
     };
 
@@ -61,8 +61,10 @@ import { fade, fly} from "svelte/transition";
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
+        (loop != null) && clearInterval(loop);
         loop = setInterval(()=> {
             move();
+            eatingTest();
             losingTest();
         }, timer)
     }
@@ -108,7 +110,21 @@ import { fade, fly} from "svelte/transition";
      * - makes the snake grows
      */
     function eatingTest() {
-        
+        if (collide(snake.body[0], food)) {
+            score += 1;
+            food.x = randomPos(width, squareSize);
+            food.y = randomPos(height, squareSize);
+            snake.body = [...snake.body, {
+                x : snake.body[snake.body.length-1].x,
+                y : snake.body[snake.body.length-1].y,
+                oldX : snake.body[snake.body.length-1].oldX,
+                oldY : snake.body[snake.body.length-1].oldY,
+            }];
+            if (timer > 200) {
+                timer -= 20;
+                gameLoop();
+            }
+        }
 
 
     }
