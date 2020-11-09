@@ -2,16 +2,19 @@
     import Snake from "./Snake.svelte";
     import Food from "./Food.svelte";
     import {randomPos} from "./Random.svelte";
+    import { fade, fly} from 'svelte/transition';
 
     // Props of the game
     export let width = 600;
     export let height = 400;
     export let squareSize = 40;  
 
-
     // Variables of the game
     let score = 0;    
-
+    let loop;
+    let timer = 500;
+    let choosedDirection = false;
+    let isLost = false;
 
 
     /**
@@ -24,12 +27,18 @@
         body : [{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY: 0,
         },{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY: 0,
         },{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY: 0,
         }],
         direction : "right",
         size : squareSize,
@@ -51,7 +60,10 @@
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
-        
+        loop = setInterval(()=>{
+            move();
+            losingTest();
+        }, timer)
 
         
     }
@@ -62,9 +74,30 @@
      * Moves each snake bodyparts based on the snake direction
      */
     function move() {
-        
+        for (let i = 0; i<snake.body.length; i ++){
+            snake.body[i].oldX = snake.body[i].x;
+            snake.body[i].oldY = snake.body[i].y;
+            if (i === 0){
+                if (snake.direction === "right"){
+                    snake.body[i].x += squareSize;
+                }
+                if (snake.direction === "left"){
+                    snake.body[i].x -= squareSize;
+                }
+                if (snake.direction === "down"){
+                    snake.body[i].y += squareSize;
+                }
+                if (snake.direction === "up"){
+                    snake.body[i].y -= squareSize;
+                }
+            }
+            else {
+                snake.body[i].x = snake.body[i-1].oldX;
+                snake.body[i].y = snake.body[i-1].oldY;
+            }
+        };
+        choosedDirection = false;
 
-        
     }
 
     /**
@@ -86,7 +119,17 @@
      * - clears the loop interval
      */
     function losingTest() {
-        
+        if (snake.body[0].x >= width || snake.body[0].x <0 || snake.body[0].y >= height || snake.body[0].y <0) {
+            isLost = true;
+            clearInterval(loop);
+        } else {
+            snake.body.forEach((bodypart, i) => {
+                if ((i !== 0) && collide(snake.body[0], bodypart)) {
+                    isLost = true;
+                    clearInterval(loop);
+                }
+            })
+        }
 
 
     }
@@ -101,9 +144,13 @@
      * @return {Boolean} true if rect1 and rect2 collide
     */
     function collide(rect1, rect2) {
-       
-
-
+        if (rect1.x < rect2.x + squareSize &&
+            rect1.x + squareSize > rect2.x &&
+            rect1.y < rect2.y + squareSize &&
+            rect1.y + squareSize > rect2.y) {
+                return true;
+            }
+            return false;
     }
 
     /**
@@ -121,15 +168,32 @@
     // Event listener -------------------------------------------------------
 
     function handleKeydown(event) {
-        
-
+        let keyCode = event.keyCode;
+            if (!choosedDirection && !isLost) {
+                if (keyCode === 39 && snake.direction !== "left"){
+                snake.direction = "right";
+                choosedDirection = true;
+            }
+            if (keyCode === 37 && snake.direction !== "right"){
+                snake.direction = "left";
+                choosedDirection = true;
+            }
+            if (keyCode === 40 && snake.direction !== "up"){
+                snake.direction = "down";
+                choosedDirection = true;
+            }
+            if (keyCode === 38 && snake.direction !== "down"){
+                snake.direction = "up";
+                choosedDirection = true;
+            }
+        }
 
     }
 
     // Automaticaly calls the game loop when the component is loaded ----------
 
     (() => {
-        
+        gameLoop();
     })();
 
 </script>
@@ -145,7 +209,7 @@
         position: relative;
         border: 1px solid black;
     }
-    input:focus {
+    /* input:focus {
         outline: none;
     }
     .colorField {
@@ -154,13 +218,13 @@
     }
     .colorField label {
         margin: 0 1rem 1rem 1rem;
-    }
+    } */
 </style>
 
 <!-- Section game area -->
 <section class="gameArea" style="width: {width}px; height: {height}px;">
     <!-- If block to test if the game is not lost -->
-
+    {#if !isLost}
         <!-- Snake component -->
         <Snake {...snake}/>
         <!-- /Snake -->
@@ -168,6 +232,10 @@
         <Food {...food}/>
         <!-- /Food -->
     <!-- Else game is lost) -->
+    {:else}
+    <h2 in:fade>Game Lost !!!</h2>
+    <p in:fly="{{ x: 100, duration : 1000}}">Your score is {score}</p>
+    {/if}
 
        
         
@@ -208,5 +276,5 @@
 <!-- /Section-->
 
 <!-- Keydown event listener -->
-
+<svelte:window on:keydown={handleKeydown}/>
 <!-- /Keydown -->

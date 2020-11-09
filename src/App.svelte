@@ -1,8 +1,5 @@
 <script>
-	import Food from "./components/Food.svelte";
-import Game from "./components/Game.svelte";
-import Snake from "./components/Snake.svelte";
-
+	import Game from "./components/Game.svelte";
 	/**
 	 * Game object
 	 * .width : width of the game area
