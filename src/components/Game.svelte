@@ -6,7 +6,10 @@
     // Props of the game
     export let width = 600;
     export let height = 400;
-    export let squareSize = 40;  
+    export let squareSize = 40;
+    let loop;
+    let timer = 500;
+    let choosedDirection = false;
 
 
     // Variables of the game
@@ -24,12 +27,18 @@
         body : [{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY: 0
         },{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY:0
         },{
             x : 0,
             y : 0,
+            oldX: 0,
+            oldY: 0
         }],
         direction : "right",
         size : squareSize,
@@ -51,7 +60,9 @@
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
-        
+        loop = setInterval(()=>{
+            move();
+        }, timer)
 
         
     }
@@ -62,7 +73,29 @@
      * Moves each snake bodyparts based on the snake direction
      */
     function move() {
-        
+        for (let i = 0; i< snake.body.length; i++){
+            snake.body[i].oldX = snake.body[i].x;
+            snake.body[i].oldY = snake.body[i].y;
+            if (i ===0){
+                if (snake.direction ==="right"){
+                    snake.body[i].x +=squareSize;
+                }
+                if (snake.direction === "left"){
+                    snake.body[i].x -= squareSize;
+                }
+                if (snake.direction === "down"){
+                    snake.body[i].y += squareSize;
+                }
+                if (snake.direction === "up"){
+                    snake.body[i].y -= squareSize;
+                }
+            }
+            else {
+                snake.body[i].x = snake.body[i-1].oldX;
+                snake.body[i].y = snake.body[i-1].oldY;
+            }
+        };
+        choosedDirection = false;
 
         
     }
@@ -121,15 +154,32 @@
     // Event listener -------------------------------------------------------
 
     function handleKeydown(event) {
+        let keyCode = event.keyCode;
         
-
-
+        if (!choosedDirection){
+            if (keyCode === 39 && snake.direction !== "left"){
+                    snake.direction = "right";
+                    choosedDirection = true;
+            }
+            if (keyCode === 37 && snake.direction !== "right"){
+                    snake.direction = "left";
+                    choosedDirection = true; 
+            }
+            if (keyCode === 40 && snake.direction !== "up"){
+                    snake.direction = "down";
+                    choosedDirection = true;
+            }
+            if (keyCode === 38 && snake.direction !== "down"){
+                    snake.direction = "up";
+                    choosedDirection = true;  
+            }
+        }
     }
 
     // Automaticaly calls the game loop when the component is loaded ----------
 
     (() => {
-        
+        gameLoop();
     })();
 
 </script>
@@ -208,5 +258,5 @@
 <!-- /Section-->
 
 <!-- Keydown event listener -->
-
+<svelte:window on:keydown={handleKeydown}/>
 <!-- /Keydown -->
