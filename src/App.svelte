@@ -1,6 +1,5 @@
 <script>
 	import Game from "./components/Game.svelte";
-
 	/**
 	 * Game object
 	 * .width : width of the game area
@@ -8,9 +7,9 @@
 	 * .squareSize : length of an in-game square
 	 */
 	let game = {
-		width : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 600 : 300,
-		height : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 400 : 450,
-		squareSize : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 40 : 30,
+		width: (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 600 : 300,
+		height: (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 400 : 450,
+		squareSize: (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 40 : 30
 	};
 
 	/**
@@ -18,10 +17,10 @@
 	*/
 	function gameInit() {
 		game = {
-			width : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 600 : 300,
-			height : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 400 : 450,
-			squareSize : (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 40 : 30,
-		};
+			width: (typeof window.innerWidth != 'undefined' && window.innerWidth > 768) ? 600 : 300,
+			height: (typeof window.innerHeight != 'undefined' && window.innerHeight > 768) ? 400 : 450,
+			squareSize: (typeof window.innerHeight != 'undefined' && window.innerHeight > 768) ? 40 : 30,
+		}
 	};
 </script>
 
@@ -35,7 +34,7 @@
 	{/key}
 	<!-- /Key -->
 	<!-- Button to restart the game -->
-	<button on:click={gameInit}>Restart</button>
+	<button on:click="{gameInit}">Restart</button>
 	<!-- /Button -->
 </main>
 

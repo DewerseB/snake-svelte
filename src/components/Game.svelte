@@ -1,7 +1,8 @@
 <script>
     import Snake from "./Snake.svelte";
     import Food from "./Food.svelte";
-    import { fade, fly } from 'svelte/transition';
+    import {randomPos} from "./Random.svelte";
+    import { fade, fly} from 'svelte/transition';
 
     // Props of the game
     export let width = 600;
@@ -9,12 +10,12 @@
     export let squareSize = 40;
 
     // Variables of the game
-    let score = 0;
-    let isLost = false;
-    let choosedDirection = false;
-    let timer = 500;
+    let score = 0;    
     let loop;
-    let radioColor = "green";
+    let timer = 500;
+    let choosedDirection = false;
+    let isLost = false;
+
 
     /**
      * The snake object
@@ -24,24 +25,24 @@
     */
     let snake = {
         body : [{
-                x: 0,
-                y: 0,
-                oldX: 0,
-                oldY: 0,
-            },{
-                x: 0,
-                y: 0,
-                oldX: 0,
-                oldY: 0,
-            },{
-                x: 0,
-                y: 0,
-                oldX: 0,
-                oldY: 0,
-            }
-        ],
+            x : 0,
+            y : 0,
+            oldX: 0,
+            oldY: 0,
+        },{
+            x : 0,
+            y : 0,
+            oldX: 0,
+            oldY: 0,
+        },{
+            x : 0,
+            y : 0,
+            oldX: 0,
+            oldY: 0,
+        }],
         direction : "right",
         size : squareSize,
+        colorSnake : "green",
     };
 
     /**
@@ -50,20 +51,23 @@
      * .size is the size of the square representing the food
     */
     let food = {
-        x : randomPos(width),
-        y : randomPos(height),
+        x : randomPos(width, squareSize),
+        y : randomPos(height,squareSize),
         size : squareSize,
+        
     }
 
     // Game loop to handle the interval of the game -----------------------------------------
 
     function gameLoop() {
         (loop !== null) && clearInterval(loop);
-        loop = setInterval(() => {
+        loop = setInterval(()=>{
             move();
             eatingTest();
             losingTest();
         }, timer)
+
+        
     }
 
     // Main functions for the gameloop -------------------------------------------------------
@@ -72,10 +76,10 @@
      * Moves each snake bodyparts based on the snake direction
      */
     function move() {
-        for (let i = 0; i < snake.body.length; i++) {
+        for (let i = 0; i<snake.body.length; i ++){
             snake.body[i].oldX = snake.body[i].x;
             snake.body[i].oldY = snake.body[i].y;
-            if ( i === 0 ) {
+            if (i === 0){
                 if (snake.direction === "right"){
                     snake.body[i].x += squareSize;
                 }
@@ -88,12 +92,14 @@
                 if (snake.direction === "up"){
                     snake.body[i].y -= squareSize;
                 }
-            } else {
+            }
+            else {
                 snake.body[i].x = snake.body[i-1].oldX;
                 snake.body[i].y = snake.body[i-1].oldY;
             }
         };
         choosedDirection = false;
+
     }
 
     /**
@@ -105,18 +111,18 @@
      */
     function eatingTest() {
         if (collide(snake.body[0], food)) {
-                score +=1;
-                food = getFood();
-                if (timer > 200) {
-					timer -= 20;
-					gameLoop();
-				};
-				snake.body = [...snake.body, {
-					x : snake.body[snake.body.length - 1].x,
-					y : snake.body[snake.body.length - 1].y,
-					oldX : snake.body[snake.body.length - 1].oldX,
-					oldY : snake.body[snake.body.length - 1].oldY,
-                }];
+            score += 1;
+            food = getFood();
+            if (timer > 200) {
+                timer -= 20;
+                gameLoop();
+            }
+            snake.body = [...snake.body, {
+                x : snake.body[snake.body.length - 1].x,
+                y : snake.body[snake.body.length - 1].y,
+                oldX : snake.body[snake.body.length - 1].oldX,
+                oldY : snake.body[snake.body.length - 1].oldY,
+            }]
         }
     }
 
@@ -127,8 +133,8 @@
      */
     function losingTest() {
         if (snake.body[0].x >= width || snake.body[0].x <0 || snake.body[0].y >= height || snake.body[0].y <0) {
-                isLost = true;
-                clearInterval(loop);
+            isLost = true;
+            clearInterval(loop);
         } else {
             snake.body.forEach((bodypart, i) => {
                 if ((i !== 0) && collide(snake.body[0], bodypart)) {
@@ -136,7 +142,9 @@
                     clearInterval(loop);
                 }
             })
-        };
+        }
+
+
     }
 
 
@@ -153,9 +161,9 @@
             rect1.x + squareSize > rect2.x &&
             rect1.y < rect2.y + squareSize &&
             rect1.y + squareSize > rect2.y) {
-                   return true;
-        }
-        return false;
+                return true;
+            }
+            return false;
     }
 
     /**
@@ -164,59 +172,51 @@
      * @return the food or the function itself
      */
     function getFood() {
-        let tempFood = { x : randomPos(width), y : randomPos(height), size : squareSize };
+        let tempFood = {
+            x : randomPos(width, squareSize),
+            y : randomPos(height, squareSize),
+            size : squareSize,
+        }
         let doesNotCollide = true;
         for (let i = 0; i < snake.body.length && doesNotCollide === true; i++) {
             if (collide(tempFood, snake.body[i])) {
                 doesNotCollide = false;
             }
-        };
+        }
         if (doesNotCollide) {
             return tempFood;
         } else {
             return getFood();
         }
     }
-
-    /**
-     * Generates a random multiple of squareSize between 0 and the parameter
-     * @param {Number} max The maximum range value
-     * @return {Number} the random number
-     */
-    function randomPos(max) {
-		let pos = (Math.floor(Math.random() * ((max/squareSize) - 1)) * squareSize);
-		return pos;
-    }
+    
     
     // Event listener -------------------------------------------------------
 
     function handleKeydown(event) {
         let keyCode = event.keyCode;
-        if (event.target.type === "radio") {
+        if (event.target.type === 'radio'){
             event.preventDefault();
         }
-		if (!choosedDirection && !isLost) {
-			// right = 39
-			if (keyCode === 39 && snake.direction !== "left"){
-				snake.direction = "right";
-				choosedDirection = true;
-			}
-			// left = 37
-			if (keyCode === 37 && snake.direction !== "right"){
-				snake.direction = "left";
-				choosedDirection = true;
-			}
-			// bottom = 40
-			if (keyCode === 40 && snake.direction !== "up"){
-				snake.direction ="down";
-				choosedDirection = true;
-			}
-			// top = 38
-			if (keyCode === 38 && snake.direction !== "down"){
-				snake.direction = "up";
-				choosedDirection = true;
-			}
-		}
+        if (!choosedDirection && !isLost) {
+             if (keyCode === 39 && snake.direction !== "left"){
+                snake.direction = "right";
+                choosedDirection = true;
+            }
+            if (keyCode === 37 && snake.direction !== "right"){
+                snake.direction = "left";
+                choosedDirection = true;
+            }
+            if (keyCode === 40 && snake.direction !== "up"){
+                snake.direction = "down";
+                choosedDirection = true;
+            }
+            if (keyCode === 38 && snake.direction !== "down"){
+                snake.direction = "up";
+                choosedDirection = true;
+            }
+        }
+
     }
 
     // Automaticaly calls the game loop when the component is loaded ----------
@@ -255,21 +255,21 @@
     <!-- If block to test if the game is not lost -->
     {#if !isLost}
         <!-- Snake component -->
-        <Snake {...snake} colorSnake={radioColor}/>
+        <Snake {...snake}/>
         <!-- /Snake -->
         <!-- Food component -->
         <Food {...food}/>
         <!-- /Food -->
     <!-- Else game is lost) -->
     {:else}
-        <h2 in:fade>Game lost !!!</h2>
-        <p in:fly="{{ x: 100, duration: 1000 }}">Your score is {score}</p>
+        <h2 in:fade>Game Lost !!!</h2>
+        <p in:fly="{{ x: 100, duration : 1000}}">Your score is {score}</p>
         {#if score < 10}
-            <p in:fly="{{ y: 100, duration: 2000 }}">You can do better</p>
+            <p in:fly="{{ y: 100, duration : 2000}}">You can do better</p>
         {:else if score >= 10 && score < 20}
-            <p in:fly="{{ y: 100, duration: 2000 }}">That's okay</p>
+            <p in:fly="{{ y: 100, duration : 2000}}">That's okay</p>
         {:else}
-            <p in:fly="{{ y: 100, duration: 2000 }}">Well done</p>
+            <p in:fly="{{ y: 100, duration : 2000}}">Well done!</p>
         {/if}
     {/if}
     <!-- /If -->
@@ -278,24 +278,38 @@
 <!-- Section bonus -->
 <section>
     <!-- Score display -->
-    <h2>Score : {score}</h2>
+   <p>Score : {score}</p>
     <!-- /Score -->
     <!-- Snake's color picker -->
-    <p>Snake's color :</p>
     <div class="colorField">
         <label>
-            <input type=radio bind:group={radioColor} value="green">
+            <input type=radio bind:group={snake.colorSnake} value="green" />
             Green
         </label>
         <label>
-            <input type=radio bind:group={radioColor} value="yellow">
+            <input type=radio bind:group={snake.colorSnake} value="yellow" />
             Yellow
         </label>
         <label>
-            <input type=radio bind:group={radioColor} value="blue">
+            <input type=radio bind:group={snake.colorSnake} value="blue" />
             Blue
         </label>
     </div>
+ 
+    
+ 
+       
+      
+      
+      
+      
+   
+  
+
+
+
+
+
     <!-- /Snake's color picker -->
 </section>
 <!-- /Section-->
