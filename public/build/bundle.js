@@ -918,10 +918,10 @@ var app = (function () {
     			attr_dev(section0, "class", "gameArea svelte-egcamn");
     			set_style(section0, "width", /*width*/ ctx[0] + "px");
     			set_style(section0, "height", /*height*/ ctx[1] + "px");
-    			add_location(section0, file$2, 160, 0, 3473);
-    			add_location(p, file$2, 187, 3, 4007);
+    			add_location(section0, file$2, 160, 0, 3471);
+    			add_location(p, file$2, 187, 3, 4005);
     			attr_dev(section1, "class", "svelte-egcamn");
-    			add_location(section1, file$2, 185, 0, 3965);
+    			add_location(section1, file$2, 185, 0, 3963);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1062,7 +1062,7 @@ var app = (function () {
      * .size is the size of the square representing a bodypart
     */
     	let snake = {
-    		body: [{ x: 80, y: 0 }, { x: 40, y: 0 }, { x: 0, y: 0 }],
+    		body: [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }],
     		direction: "right",
     		size: squareSize,
     		colorSnake: "green"
