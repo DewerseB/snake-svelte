@@ -1,7 +1,8 @@
 <script>
-    import App from "../App.svelte";
+import App from "../App.svelte";
 import Food from "./Food.svelte";
 import Snake from "./Snake.svelte";
+import {randomPos} from "./Random.svelte"; 
 
     // Props of the game
     export let width;
@@ -42,7 +43,9 @@ import Snake from "./Snake.svelte";
      * .size is the size of the square representing the food
     */
     let food = {
-        
+        x :randomPos(width, squareSize),
+        y :randomPos(height, squareSize),
+        size : squareSize,
     }
 
     // Game loop to handle the interval of the game -----------------------------------------
@@ -119,11 +122,7 @@ import Snake from "./Snake.svelte";
      * @param {Number} max The maximum range value
      * @return {Number} the random number
      */
-    function randomPos(max) {
-		
-
-
-    }
+    
     
     // Event listener -------------------------------------------------------
 
@@ -172,7 +171,7 @@ import Snake from "./Snake.svelte";
         <Snake {...snake} />
         <!-- /Snake -->
         <!-- Food component -->
-      
+        <Food {...food} />
         <!-- /Food -->
     <!-- Else game is lost) -->
 
