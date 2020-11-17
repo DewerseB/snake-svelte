@@ -13,7 +13,7 @@ A simple Snake game made with JS and Svelte for a workshop during our formation 
 
 ## Project
 
-The repository served as a base to animate a [3h workshop](https://www.linkedin.com/feed/update/urn:li:activity:6734396734895620096/) to showcase Svelte.
+The repository served as a base for a Svelte initiation during a [3h workshop](https://www.linkedin.com/feed/update/urn:li:activity:6734396734895620096/).  
 It consists of multiple branches showcasing every steps of the project.
 
 
