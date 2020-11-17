@@ -2,7 +2,7 @@
 
 ## About
 
-A simple Snake game made with JS and Svelte for a workshop during our formation at Becode.
+A simple Snake game made with JS and Svelte for a workshop during our formation at Becode.  
 A demo is available [here](https://dewerseb.github.io/snake-svelte/).
 
 ## Collaborators
@@ -15,7 +15,7 @@ A demo is available [here](https://dewerseb.github.io/snake-svelte/).
 ## Project
 
 The repository served as a base for a Svelte initiation during a [3h workshop](https://www.linkedin.com/feed/update/urn:li:activity:6734396734895620096/).  
-It consists of multiple branches showcasing every steps of the project.
+It consists of multiple branches showcasing every step of the project.
 
 
 #### Main branch
