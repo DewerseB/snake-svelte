@@ -9,7 +9,7 @@ A demo is available [here](https://dewerseb.github.io/snake-svelte/).
 
 -   [**Jean-Charles Brognez**](https://github.com/jcbrognez)
 -   [**Marie Pierard**](https://github.com/Marie-Pierard)
--   [**Stéphane Kalonji**](https://github.com/LinardJeremy)
+-   [**Jeremy Linard**](https://github.com/LinardJeremy)
 -   [**Bastien Dewerse**](https://github.com/DewerseB)
 
 ## Project
