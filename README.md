@@ -1,105 +1,39 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Snake-svelte
 
----
+## About
 
-# svelte app
+A simple Snake game made with JS and Svelte for a workshop during our formation at Becode.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## Collaborators
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+-   [**Jean-Charles Brognez**](https://github.com/jcbrognez)
+-   [**Marie Pierard**](https://github.com/Marie-Pierard)
+-   [**Stéphane Kalonji**](https://github.com/LinardJeremy)
+-   [**Bastien Dewerse**](https://github.com/DewerseB)
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+## Project
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+The repository served as a base for a Svelte initiation during a [3h workshop](https://www.linkedin.com/feed/update/urn:li:activity:6734396734895620096/).  
+It consists of multiple branches showcasing every steps of the project.
 
 
-## Single-page app mode
+#### Main branch
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+The main branch showcases the finished game with features we planned to present.
+It was used as a demo for the workshop.
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+#### Dev branch
 
-```js
-"start": "sirv public --single"
-```
+The dev branch was used for live coding during the workshop.
+It contains every features made live with workshop attendees.
 
-## Using TypeScript
+#### Step branches
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+There are 7 steps, each step consist of a fonctionnal and displayable part of the game:
+- step1: structure of the project and the files, with no logic
+- step2: Game component displaying the game area
+- step3: Snake component displaying a static snake with a position in the game area based on props
+- step4: Food component displaying a static food with a random position
+- step5: Game loop and movements logic
+- step6: Collision logic and game lost screen
+- step7: Eating and growing logic with bonuses (score, restart button)
