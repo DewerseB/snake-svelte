@@ -26,7 +26,7 @@ It was used as a demo for the workshop.
 #### Dev branch
 
 The dev branch was used for live coding during the workshop.
-It contains every features made live with workshop attendees.
+It contains every feature made live with workshop attendees.
 
 #### Step branches
 
