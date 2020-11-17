@@ -37,3 +37,7 @@ There are 7 steps, each step consist of a fonctionnal and displayable part of th
 - step5: Game loop and movements logic
 - step6: Collision logic and game lost screen
 - step7: Eating and growing logic with bonuses (score, restart button)
+
+#### Build branch
+
+A static branch to deploy a demo on GitHub pages.
