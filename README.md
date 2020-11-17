@@ -3,6 +3,7 @@
 ## About
 
 A simple Snake game made with JS and Svelte for a workshop during our formation at Becode.
+A demo is available [here](https://dewerseb.github.io/snake-svelte/).
 
 ## Collaborators
 
